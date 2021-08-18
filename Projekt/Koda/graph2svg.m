@@ -1,4 +1,4 @@
-function a = graph2svg(G,indikatorji,indi,i)
+function a = graph2svg(G,indikatorji,indi,i,filename)
 a=NaN;
 fig=figure("Visible","Off");
 set(fig, 'Position', get(0, 'Screensize'));
@@ -10,8 +10,11 @@ name=name(indi(i));
 str=name+".svg";
 
 str=erase(str,[":" ,"\" ,"/","*","?",' " ',"<" ,">" ,"|" ]);
-saveas(fig,str)
 
+str="C:\Users\Westlife\Desktop\IJS-projekt\Projekt\Rezultati\"+filename+"\"+str;
+
+saveas(fig,str)
+close(fig);
    
     
 end

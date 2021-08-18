@@ -1,5 +1,5 @@
 # Kavzalnost
-Ta projekt je namenjen iskanju kavzalnosti v različnih dataset-ih s poudarkom na idikatorjih, ki so povezani s Sustainable Development Goals.
+Ta projekt je namenjen iskanju kavzalnosti v različnih dataset-ih s poudarkom na indikatorjih, ki so povezani s Sustainable Development Goals.
 
 # Program
 Dataset, ki sem ga uporabljal je dostopen na https://datacatalog.worldbank.org/dataset/world-development-indicators pod zavihkom Data & Resources

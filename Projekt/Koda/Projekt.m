@@ -37,6 +37,7 @@ for i =1:size(cause,1)
     end
     
 end
+cause=indi;
 
 
 %naredimo celico size(lags) matrik kjer vsaka matrika predstavlja izide GC za določen lag. 
@@ -51,13 +52,19 @@ kavzalost=vplivi(matrika,cause,effect,216,lags,alpha,test);
 %če je bil GC test pozitiven za vse lag-e, drugače (i,j)=0
 
 povprecje=povprecjeKavzalnosti(kavzalnost,cause,effect,lags);
+povprecje(povprecje<1)=0;
 
 %Za vsak indikator, ki ga testiramo naredimo usmerjen graf, kjer je matrika
 %sosedov enaka "povprecje". Grafi se tudi shranijo v trenutno datoteko.
 
+adjacency=zeros(size(indikatorji,1));
+for i=1:size(indi,1)
+adjacency(indi(i),:)=povprecje(i,:);
+end
+
 for i=1:size(cause,1)  
-G=matrix2graph(povprecje,indikatorji,cause,i);
-graph2svg(G,indikatorji,indi,i);
+G=matrix2outgraph(adjacency,indikatorji,i);
+graph2svg(G,indikatorji,indi,i,"Grafi");
 end
 
 %Naredimo txt datoteko v trenutni mapi kjer izpisemo vse granger
