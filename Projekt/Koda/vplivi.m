@@ -1,4 +1,4 @@
-function celicaVplivov = vplivi(matrika,cause,effect,idDrzave,lags,alpha,test)
+function [celicaP,celicaVplivov] = vplivi(matrika,cause,effect,idDrzave,lags,alpha,test)
 %vplivi.m returns a matrix or a cell of matrices (if size(lags)>1) where
 %for a given country the (i,j)-th component is the granger causallity of
 %the i-th indicator to the j-th indicator.
@@ -44,23 +44,33 @@ function celicaVplivov = vplivi(matrika,cause,effect,idDrzave,lags,alpha,test)
 
 %Pripravimo output
 celicaVplivov={};
+celicaP={};
 for i=1:size(lags,2)
     celicaVplivov{i}=NaN(size(cause,1),size(effect,1));
+    celicaP{i}=NaN(size(cause,1),size(effect,1));
+    
 end
 
 
-
+L=size(effect,1)
 
 %Za vsak izbrani lag naredimo matriko kavzalnosti
- for k=1:size(lags,2)
+tic
+ parfor k=1:size(lags,2)
+    warning('off', 'all')
     lag=celicaVplivov{k};
+    lag1=celicaP{k};
+    
     for i=1:size(cause,1)
+       warning('off', 'all')
 
        
        
-        prva_sprem=matrika(idDrzave,:,cause(i))';
+        prva_sprem=diff(matrika(idDrzave,:,cause(i)))';
         
-        for j=1:size(effect,1)
+        k
+        i
+        for j=1:L
          
             
             if effect(j)==cause(i)
@@ -69,9 +79,10 @@ end
                 try
                    
 
-                        druga_sprem=matrika(idDrzave,:,effect(j))';
-                        h=gctest(prva_sprem,druga_sprem,"NumLags",lags(k),"Test",test,"Alpha",alpha);
+                        druga_sprem=diff(matrika(idDrzave,:,effect(j)))';
+                        [h,p]=gctest(prva_sprem,druga_sprem,"NumLags",lags(k),"Test",test,"Alpha",alpha);
                         lag(i,j)=h;
+                        lag1(i,j)=p;
                       
                      
                 catch
@@ -79,11 +90,13 @@ end
                 end
             end
         end
+       
     end
      celicaVplivov{k}=lag;
+     celicaP{k}=lag1;
   
  end
-    
+ toc   
     
 end
 

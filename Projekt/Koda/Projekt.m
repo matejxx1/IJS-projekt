@@ -31,13 +31,14 @@ cause=linspace(1,1443,1443)';
 effect=linspace(1,1443,1443)';
 indi=[];
 for i =1:size(cause,1)
-    non_nan=nnz(~isnan(matrika(216,:,cause(i))));
+    non_nan=nnz(~isnan(matrika(idDrzave,:,cause(i))));
     if non_nan>=20
         indi=[indi ;cause(i)];
     end
     
 end
 cause=indi;
+
 
 
 %naredimo celico size(lags) matrik kjer vsaka matrika predstavlja izide GC za določen lag. 
@@ -51,16 +52,14 @@ kavzalost=vplivi(matrika,cause,effect,216,lags,alpha,test);
 %PovprecjeKavzalnosti vrne size(indikatorji)^2 matriko kjer je (i,j)=1 samo
 %če je bil GC test pozitiven za vse lag-e, drugače (i,j)=0
 
-povprecje=povprecjeKavzalnosti(kavzalnost,cause,effect,lags);
+povprecje=povprecjeKavzalnosti(kavzalost1,cause,effect,lags);
 povprecje(povprecje<1)=0;
+
+povprecje1=povprecjeKavzalnosti(pValue,cause,effect,lags);
 
 %Za vsak indikator, ki ga testiramo naredimo usmerjen graf, kjer je matrika
 %sosedov enaka "povprecje". Grafi se tudi shranijo v trenutno datoteko.
 
-adjacency=zeros(size(indikatorji,1));
-for i=1:size(indi,1)
-adjacency(indi(i),:)=povprecje(i,:);
-end
 
 for i=1:size(cause,1)  
 G=matrix2outgraph(adjacency,indikatorji,i);
