@@ -19,7 +19,7 @@ alpha=0.05;
 
 
 %Izberimo katero drzavo iz tabele "drzave" (id Slovenije je 216)
-idDrzave=216;
+idDrzave=256;
 
 %izklopimo warning da gre hitreje
 warning("off","all")
@@ -47,7 +47,7 @@ cause=indi;
 
 
 
-kavzalost=vplivi(matrika,cause,effect,216,lags,alpha,test);
+[pValueUruguay,kavzalostUruguay]=vplivi(matrika,cause,effect,idDrzave,lags,alpha,test);
 
 %PovprecjeKavzalnosti vrne size(indikatorji)^2 matriko kjer je (i,j)=1 samo
 %če je bil GC test pozitiven za vse lag-e, drugače (i,j)=0

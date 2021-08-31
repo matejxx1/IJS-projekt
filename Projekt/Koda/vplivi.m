@@ -53,6 +53,7 @@ end
 
 
 L=size(effect,1)
+M=size(cause,1)
 
 %Za vsak izbrani lag naredimo matriko kavzalnosti
 tic
@@ -61,7 +62,7 @@ tic
     lag=celicaVplivov{k};
     lag1=celicaP{k};
     
-    for i=1:size(cause,1)
+    for i=1:M
        warning('off', 'all')
 
        
