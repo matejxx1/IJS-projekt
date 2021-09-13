@@ -4,11 +4,11 @@ temp=adjacency.*0;
 temp(:,i)=adjacency(:,i);
 adjacency=temp;
 
+
 A=table2array(indikatorji);
 
 
 G=digraph(adjacency,A','omitselfloops'); 
-
 
 
 

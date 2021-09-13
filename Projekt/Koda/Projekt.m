@@ -19,7 +19,7 @@ alpha=0.05;
 
 
 %Izberimo katero drzavo iz tabele "drzave" (id Slovenije je 216)
-idDrzave=256;
+idDrzave=216;
 
 %izklopimo warning da gre hitreje
 warning("off","all")

@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%
-idDrzave=256;
+idDrzave=254;
 
 cause=linspace(1,1443,1443)';
 effect=linspace(1,1443,1443)';
@@ -17,9 +17,9 @@ cause=indi;
 
 
 
-adjacencyUruguay=zeros(size(indikatorji,1));
+adjacencyUSA=zeros(size(indikatorji,1));
 for i=1:size(indi,1)
-adjacencyUruguay(indi(i),:)=povprecjeUruguay(i,:).*povprecjeUruguay(i,:);
+adjacencyUSA(indi(i),:)=povprecjeUSA(i,:).*povprecjePUSA(i,:);
 end
 
 
